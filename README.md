@@ -40,7 +40,9 @@ The repository is meant to be read in three stages, which is also the order
 `scripts/run_all.py` regenerates the figures:
 
 1. **3D cube model.** Explore cell-shape interactions in three dimensions. Output
-   files are `figures/cube3d_*.png` and the animation `figures/cube3d_multipanel.gif`.
+   files are the overview `figures/cube3d_multipanel.png` with its animation
+   `figures/cube3d_multipanel.gif`, and the role-inversion figures
+   `figures/cube3d_inversion.png` and `figures/cube3d_inversion_analysis.png`.
 2. **Range-expansion model.** Explore the same interactions and shapes as a 2D
    radial range expansion. Output files are `figures/re_panels.png` and the
    animation `figures/re_rangeexp.gif`.
@@ -89,20 +91,23 @@ ecomodel/
     render_re.py       capsule contours, strain, field and lineage panels, GIF
     metrics_re.py      frontier sector statistics and per-strain outcomes
   scripts/
-    # 3D
-    make_cube3d.py  make_cube3d_shapes.py  make_cube3d_lineage_matrix.py
-    make_cube3d_factorial.py  make_cube3d_stats.py  make_cube3d_analysis.py
-    make_cube3d_control.py  make_cube3d_spatialgen.py  make_cube3d_travel.py
-    make_cube3d_rangeexp.py  make_cube3d_inversion.py
+    # 3D cube model, used in the default pipeline
+    make_cube3d.py         overview panels and the cube animation
+    make_cube3d_inversion.py   the cube role-inversion figures
+    # 3D cube model, original descriptive scripts kept with the preserved model,
+    # not run by the default pipeline
+    make_cube3d_shapes.py  make_cube3d_lineage_matrix.py  make_cube3d_factorial.py
+    make_cube3d_stats.py   make_cube3d_analysis.py  make_cube3d_control.py
+    make_cube3d_spatialgen.py  make_cube3d_travel.py  make_cube3d_rangeexp.py
     # range expansion
     make_re_panels.py      strain, field with contours, lineage sectors, and GIF
     make_re_factorial.py   shape-by-sign factorial and per-interaction tests
     make_re_metrics.py     frontier sector statistics per interaction and shape
-    make_re_inversion.py   each interaction with the cell shapes swapped between roles
+    make_re_inversion.py   each interaction with the cell shapes swapped between sides
     make_stats_report.py   complete per-combination statistics tables for the README
     make_integrated.py     both models side by side, by shape and by lineage, all interactions
     run_all.py             regenerate everything in reading order
-  figures/   PNG stills and the two essential GIFs
+  figures/   the kept PNG stills and the three essential GIFs
   README.md
 ```
 
@@ -505,7 +510,7 @@ changes which shape sits on which side, and the table lists each shape once.
 
 Kruskal-Wallis across the three shapes: lineage success *** (p = 1.5e-10); mixing ratio ** (p = 0.0073); sector width ** (p = 0.0073). Replicates: success N = 4 per shape pair, sector metrics N = 4 per shape.
 
-Figures: `re_panels.png` (row 5), `re_factorial.png`, `re_sectorwidth_byinteraction.png`, `re_mixing_byinteraction.png`, `re_inversion.png`, `re_rangeexp.gif` (panel 5); 3D `cube3d_lineage_mutualism.png`.
+Figures: `re_panels.png` (row 5), `re_factorial.png`, `re_sectorwidth_byinteraction.png`, `re_mixing_byinteraction.png`, `re_inversion.png`, `re_rangeexp.gif` (panel 5).
 
 ### Competition (-, -)
 
@@ -641,43 +646,39 @@ of an interaction carry the same sign, the cell shape sets the spatial outcome.
 When the two sides carry different signs, the side a cell is placed on can take
 over, so the shape and the side have to be read together.
 
-## Figures from the 3D cube model
+## Figures
 
-These describe the 3D model and are kept for the qualitative spatial picture. The
-metrics in them are computed on the 3D state and are separate from the
-range-expansion metrics above.
+These are the figures kept and shown in this README.
 
-![3D overview](figures/cube3d_multipanel.png)
+Integrated view, both models together:
 
-![3D shape matrix, mutualism](figures/cube3d_shapes_mutualism.png)
+- `integrated_panels.png`, every interaction as a 3D cube and as a 2D range
+  expansion, each coloured by cell shape and by founding lineage.
+- `integrated_rangeexp.gif`, the cube and the range expansion growing together by
+  lineage, for all six interactions.
 
-![3D lineage matrix, mutualism](figures/cube3d_lineage_mutualism.png)
+Range-expansion model:
 
-![3D clones, mutualism](figures/cube3d_clones_mutualism.png)
+- `re_panels.png`, for each interaction the cells by shape, the nutrient field
+  with the cell contours on top, and the cells by founding lineage.
+- `re_lineage_panels.png`, the final colonies of all six interactions by lineage.
+- `re_rangeexp.gif`, the six interactions growing, coloured by shape.
 
-![3D lineage tree](figures/cube3d_lineage_tree.png)
+Analysis, computed from the range-expansion model, with the cube shown alongside
+for the swap:
 
-![3D growth](figures/cube3d_growth.png)
+- `re_factorial.png`, cell shape against interaction sign.
+- `re_success_byinteraction.png` and `re_travel_byinteraction.png`, lineage
+  success and travel distance by interaction and shape.
+- `re_mixing_byinteraction.png` and `re_sectorwidth_byinteraction.png`, the two
+  sector metrics by interaction and shape.
+- `re_inversion.png` and `re_inversion_analysis.png`, each interaction with the
+  two shapes swapped between the sides.
+- `cube3d_inversion.png` and `cube3d_inversion_analysis.png`, the same swap run in
+  the cube model.
 
-![3D top-down range-expansion view](figures/cube3d_rangeexp.png)
-
-![3D spatial-genetics](figures/cube3d_spatialgen.png)
-
-![3D success by interaction](figures/cube3d_success_byinteraction.png)
-
-![3D travel by interaction](figures/cube3d_travel_byinteraction.png)
-
-![3D factorial](figures/cube3d_factorial.png)
-
-![3D stats success](figures/cube3d_stats_success.png)
-
-![3D stats complexity](figures/cube3d_stats_complexity.png)
-
-![3D travel](figures/cube3d_travel.png)
-
-![3D clones](figures/cube3d_clones.png)
-
-![3D control](figures/cube3d_control.png)
+The cube model also appears as the overview `cube3d_multipanel.png` at the top of
+this README and throughout the integrated view.
 
 ## Animations
 
